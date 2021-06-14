@@ -15,20 +15,21 @@ cuda 11.0<br>
 
 # Generate trt engine and infer
 1.gen a fir using 
-"""
+```
 mkdir build &&cd build
-"""
+```
 and run 
-"""
+```
 cmake ..&&make
-"""
-to gen exec.
+```
+to gen exec.<br>
 2. generate engine, using
-"""
+```
 ./effficientnet -s
-"""
-command.
+```
+command.<br>
 3. test random generated imgs, using
-"""
+```
 ./efficientnet -d
-"""
+```
+<br>
