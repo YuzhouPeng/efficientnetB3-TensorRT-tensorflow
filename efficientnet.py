@@ -11,7 +11,7 @@ import os
 import struct
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-image_size = 300  # We'll resize input images to this size
+image_size = 224  # We'll resize input images to this size
 patch_size = (2, 3)  # Size of the patches to be extract from the input images
 num_patches = (32, 10)
 projection_dim = 128
@@ -35,37 +35,8 @@ data_augmentation = Sequential(
 
 
 
-# from tensorflow.keras.datasets.cifar100 import load_data
-# (x_train, y_train), (x_test, y_test) = load_data()
-# import matplotlib.pyplot as plt
-#
-# plt.figure(figsize=(4, 4))
-# image = x_train[np.random.choice(range(x_train.shape[0]))]
-# plt.imshow(image.astype("uint8"))
-# plt.axis("off")
-# plt.show()
-#
-# resized_image = tf.image.resize(
-#     tf.convert_to_tensor([image]), size=(image_size, image_size)
-# )
-# patches = Patches(patch_size)(resized_image)
-# print(f"Image size: {image_size} X {image_size}")
-# print(f"Patch size: {patch_size} X {patch_size}")
-# print(f"Patches per image: {patches.shape[1]}")
-# print(f"Elements per patch: {patches.shape[-1]}")
-#
-# n = int(np.sqrt(patches.shape[1]))
-# plt.figure(figsize=(4, 4))
-# for i, patch in enumerate(patches[0]):
-#     ax = plt.subplot(n, n, i + 1)
-#     patch_img = tf.reshape(patch, (patch_size, patch_size, 3))
-#     plt.imshow(patch_img.numpy().astype("uint8"))
-#     plt.axis("off")
-# plt.show()
 
-
-
-def vit_model(patch_size=patch_size,
+def efficient_model(patch_size=patch_size,
               num_patches=num_patches,
               projection_dim=projection_dim,
               transformer_layers=transformer_layers,
@@ -87,12 +58,11 @@ def vit_model(patch_size=patch_size,
 
 
 if __name__ == "__main__":
-    model = vit_model()
+    model = efficient_model()
     model.summary()
     model.compile()
     model.save_weights("/home/pengyuzhou/workspace/tensorrtx_new/tensorrtx/psenet/models")
-    # h5_to_pb("123.h5")
-    # model.load_weights("123.h5")
+
 
 
 
